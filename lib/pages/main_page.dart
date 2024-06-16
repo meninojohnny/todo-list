@@ -5,7 +5,6 @@ import 'package:todolist2/components/task_list.dart';
 import 'package:todolist2/provider/task_provider.dart';
 
 class MainPage extends StatefulWidget {
-
   MainPage({super.key});
 
   @override
@@ -13,16 +12,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  bool isLoading = true;
-
   @override
   initState() {
     super.initState();
-    Provider.of<TaskProvider>(context, listen: false).load().then((_) {
-      setState(() {
-        isLoading = false;
-      });
-    });
+    Provider.of<TaskProvider>(context, listen: false).load();
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -48,12 +41,10 @@ class _MainPageState extends State<MainPage> {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: TaskList(),
-            ),
+      body: const Padding(
+        padding: EdgeInsets.all(10.0),
+        child: TaskList(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openTransactionFormModal(context),
         splashColor: Theme.of(context).shadowColor,

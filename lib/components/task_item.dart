@@ -7,6 +7,12 @@ import 'package:todolist2/provider/task_provider.dart';
 class TaskItem extends StatelessWidget {
   final Task task;
   const TaskItem({super.key, required this.task});
+  bool isClose(DateTime data) {
+    DateTime hoje = DateTime.now();
+    Duration diferenca = data.difference(hoje);
+
+    return diferenca.inDays <= 1;
+  }
 
   IconData iconTask() {
     switch (task.category) {
@@ -73,7 +79,10 @@ class TaskItem extends StatelessWidget {
                     Text(
                       DateFormat('dd/MM/yyyy').format(task.date),
                       style: const TextStyle(fontWeight: FontWeight.w400),
-                    )
+                    ),
+                    (isClose(task.date))
+                        ? const Icon(Icons.alarm)
+                        : const Text('')
                   ],
                 ),
                 Text(

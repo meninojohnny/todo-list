@@ -46,7 +46,7 @@ class TaskProvider extends ChangeNotifier {
 
     int index = tasks.indexWhere((task) => task.id == task.id);
     tasks[index] = task;
-    
+
     notifyListeners();
   }
 
@@ -58,16 +58,21 @@ class TaskProvider extends ChangeNotifier {
   Future<void> load() async {
     tasks.clear();
     final response = await http.get(Uri.parse("$dbUrl/tasks.json"));
-    final Map<String, dynamic> body = jsonDecode(response.body);
-    body.forEach((key, value) {
-      Task task = Task(
-          id: key,
-          category: value["category"],
-          title: value['title'],
-          description: value['description'],
-          date: DateTime.parse(value['date']));
-      tasks.add(task);
-    });
+    final Map<String, dynamic>? body = jsonDecode(response.body);
+    debugPrint(body.toString());
+
+    if (body!.isNotEmpty) {
+      body!.forEach((key, value) {
+        Task task = Task(
+            id: key,
+            category: value["category"],
+            title: value['title'],
+            description: value['description'],
+            date: DateTime.parse(value['date']));
+        tasks.add(task);
+      });
+    }
+
     notifyListeners();
   }
 }

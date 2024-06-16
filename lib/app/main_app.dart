@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         title: "Expenses",
         theme: ThemeData(
-          colorSchemeSeed: Colors.purpleAccent,
+          colorSchemeSeed: const Color.fromARGB(255, 251, 64, 64),
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
