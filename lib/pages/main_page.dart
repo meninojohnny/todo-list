@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
     Provider.of<TaskProvider>(context, listen: false).load();
   }
 
-  _openTransactionFormModal(BuildContext context) {
+  _openTaskFormModal(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (_) {
@@ -37,20 +37,49 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Theme.of(context).focusColor,
         actions: [
           IconButton(
-              onPressed: () => _openTransactionFormModal(context),
+              onPressed: () => _openTaskFormModal(context),
               icon: const Icon(Icons.add))
         ],
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(10.0),
-        child: TaskList(),
+        child: Stack(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Niscon Costa | João Vitor | Bruno Silva",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            TaskList(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _openTransactionFormModal(context),
+        onPressed: () => _openTaskFormModal(context),
         splashColor: Theme.of(context).shadowColor,
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // bottomNavigationBar: Container(
+      //   padding: EdgeInsets.all(10.0),
+      //   color: Colors.grey[200],
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget>[
+      //       SizedBox(width: 5.0),
+      //       Text(
+      //         'Nicson Antunes, Bruno Silva, João Vitor',
+      //         style: TextStyle(fontSize: 16.0),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

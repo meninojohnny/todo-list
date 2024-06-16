@@ -15,11 +15,13 @@ class _TaskViewScreenState extends State<TaskViewScreen> {
   Widget build(BuildContext context) {
     final task = ModalRoute.of(context)?.settings.arguments as Task;
 
-    _openTransactionFormModal(BuildContext context) {
+    _openTaskFormModal(BuildContext context) {
       showModalBottomSheet(
           context: context,
           builder: (_) {
-            return TaskForm(task: task,);
+            return TaskForm(
+              task: task,
+            );
           });
     }
 
@@ -28,7 +30,7 @@ class _TaskViewScreenState extends State<TaskViewScreen> {
         title: Text(task.title),
         actions: [
           IconButton(
-              onPressed: () => _openTransactionFormModal(context),
+              onPressed: () => _openTaskFormModal(context),
               icon: const Icon(Icons.edit))
         ],
       ),
